@@ -6,7 +6,7 @@ import io
 import os
 import json
 
-TOKEN = 'OTU4MDMwMDg3NTUzNDE3Mjc3.YkHZDA.L1VHfRAm6dCnRi0sYA-ujemfc2M'
+TOKEN = os.getenv('TOKEN')
 
 bot = commands.Bot(command_prefix='!')
 client = discord.Client()
@@ -213,11 +213,12 @@ async def on_ready():
 def readDatabase(type, discordId, discordName, certName, certMessage, walletAdress):
     global connection
     try:
-        connection = psycopg2.connect(user='xgvgveawtakmub',
-                                      password='1b28381539c1f21c190a1b5e38e1b59a8ebf29b69a9d8e1067b8eecc1eaeb6c6',
-                                      host='ec2-63-35-156-160.eu-west-1.compute.amazonaws.com',
+
+        connection = psycopg2.connect(user=os.getenv('USER'),
+                                      password=os.getenv('PASSWORD'),
+                                      host=os.getenv('HOST'),
                                       port=5432,
-                                      database='d1vjp7vht6n8lf')
+                                      database=os.getenv('DATABASE'))
         cursor = connection.cursor()
 
         result = ''
